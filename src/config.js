@@ -1,8 +1,21 @@
 const os = require('os')
 const ifaces = os.networkInterfaces()
+const fetch = require('sync-fetch')
 
-const getLocalIp = () => {
+const metadata = fetch('https://api.ipify.org?format=json', {
+  headers: {
+    Accept: 'application/json'
+  }
+}).json()
+const publicIP = metadata.ip;
+if (publicIP) {
+  console.log('Public IP address:', publicIP);
+} else {
+  console.error('Failed to fetch public IP address');
+}
+const getLocalIp = (req,res) => {
   let localIp = '127.0.0.1'
+
   Object.keys(ifaces).forEach((ifname) => {
     for (const iface of ifaces[ifname]) {
       // Ignore IPv6 and 127.0.0.1
@@ -17,6 +30,7 @@ const getLocalIp = () => {
   return localIp
 }
 
+console.log(getLocalIp(),"getLocalIp()");
 module.exports = {
   listenIp: '0.0.0.0',
   listenPort: 3000,
@@ -68,7 +82,7 @@ module.exports = {
       listenIps: [
         {
           ip: '0.0.0.0',
-          announcedIp: getLocalIp() // replace by public IP address
+          announcedIp: getLocalIp()// replace by public IP address
         }
       ],
       maxIncomingBitrate: 1500000,
