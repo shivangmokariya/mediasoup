@@ -39,7 +39,7 @@ module.exports = {
 
   mediasoup: {
     // Worker settings
-    numWorkers: 1,
+    numWorkers: Object.keys(os.cpus()).length,
     worker: {
       rtcMinPort: 10000,
       rtcMaxPort: 10100,
