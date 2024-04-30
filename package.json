@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "httpolyglot": "^0.1.2",
     "mediasoup": "^3.8.2",
-    "mediasoup-client": "^3.6.37",
+    "mediasoup-client": "^3.7.7",
     "socket.io": "^4.1.3",
     "sync-fetch": "^0.5.2"
   },

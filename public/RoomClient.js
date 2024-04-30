@@ -114,7 +114,7 @@ class RoomClient {
     // init producerTransport
     {
       const data = await this.socket.request('createWebRtcTransport', {
-        forceTcp: false,
+        forceTcp: true,
         rtpCapabilities: device.rtpCapabilities
       })
 
@@ -329,17 +329,17 @@ class RoomClient {
             rid: 'r0',
             maxBitrate: 100000,
             //scaleResolutionDownBy: 10.0,
-            scalabilityMode: 'S1T3'
+            scalabilityMode: 'S3T3'
           },
           {
             rid: 'r1',
             maxBitrate: 300000,
-            scalabilityMode: 'S1T3'
+            scalabilityMode: 'S3T3'
           },
           {
             rid: 'r2',
             maxBitrate: 900000,
-            scalabilityMode: 'S1T3'
+            scalabilityMode: 'S3T3'
           }
         ]
         params.codecOptions = {
@@ -347,7 +347,6 @@ class RoomClient {
         }
       }
       producer = await this.producerTransport.produce(params)
-
       console.log('Producer', producer)
 
       this.producers.set(producer.id, producer)
