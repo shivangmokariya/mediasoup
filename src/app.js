@@ -19,9 +19,15 @@ const io = require('socket.io')(httpsServer)
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-httpsServer.listen(config.listenPort, () => {
-  console.log('Listening on https://' + config.listenIp + ':' + config.listenPort)
-})
+// httpsServer.listen(config.listenPort, () => {
+//   console.log('Listening on https://' + config.listenIp + ':' + config.listenPort)
+// })
+const LISTEN_IP = '0.0.0.0'; // Bind to all interfaces (IPv4 + IPv6)
+
+httpsServer.listen(config.listenPort, LISTEN_IP, () => {
+  console.log(`Listening on https://${LISTEN_IP}:${config.listenPort}`);
+});
+
 
 // all mediasoup workers
 let workers = []
